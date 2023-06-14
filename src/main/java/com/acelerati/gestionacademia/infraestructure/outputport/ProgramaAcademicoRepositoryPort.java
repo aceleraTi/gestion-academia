@@ -1,6 +1,6 @@
 package com.acelerati.gestionacademia.infraestructure.outputport;
 
-import com.acelerati.gestionacademia.domain.ProgramaAcademico;
+import com.acelerati.gestionacademia.domain.model.ProgramaAcademico;
 
 public interface ProgramaAcademicoRepositoryPort {
 

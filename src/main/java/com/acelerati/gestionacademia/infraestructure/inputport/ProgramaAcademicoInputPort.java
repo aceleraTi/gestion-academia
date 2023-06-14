@@ -1,10 +1,10 @@
 package com.acelerati.gestionacademia.infraestructure.inputport;
 
-import com.acelerati.gestionacademia.domain.ProgramaAcademico;
+import com.acelerati.gestionacademia.domain.model.ProgramaAcademico;
 
 public interface ProgramaAcademicoInputPort {
 
-    ProgramaAcademico save(ProgramaAcademico programaAcademico);
+    ProgramaAcademico crearProgramaAcademico(ProgramaAcademico programaAcademico);
 
 }
 

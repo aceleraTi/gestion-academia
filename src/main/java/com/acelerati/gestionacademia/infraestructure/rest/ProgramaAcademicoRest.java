@@ -1,6 +1,6 @@
 package com.acelerati.gestionacademia.infraestructure.rest;
 
-import com.acelerati.gestionacademia.domain.ProgramaAcademico;
+import com.acelerati.gestionacademia.domain.model.ProgramaAcademico;
 import com.acelerati.gestionacademia.infraestructure.inputport.ProgramaAcademicoInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,7 +23,7 @@ public class ProgramaAcademicoRest {
     @PostMapping()
     @Operation(summary = "Crear un programa academico.")
     public ResponseEntity<ProgramaAcademico> save(@RequestBody ProgramaAcademico programaAcademico) {
-        return new ResponseEntity<>(this.programaAcademicoInputPort.save(programaAcademico),
+        return new ResponseEntity<>(this.programaAcademicoInputPort.crearProgramaAcademico(programaAcademico),
                 HttpStatus.CREATED);
     }
 }

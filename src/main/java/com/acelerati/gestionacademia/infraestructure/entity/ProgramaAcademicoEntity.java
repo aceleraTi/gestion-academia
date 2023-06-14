@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -18,11 +19,13 @@ public class ProgramaAcademicoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 40, unique = true)
-    @Size(min = 8)
+    @Column(unique = true)
+    @Size(min = 8, max = 40, message = "El nombre del programa debe tener una longitud de 8" +
+            " a 40 caracteres.")
+    @Pattern(regexp = "^[ A-Za-zñÑáéíóúÁÉÍÓÚ]+$", message = "El nombre solo debe tener letras.")
     private String nombre;
 
-    @Column(length = 200, unique = true)
+    @Size(min = 20, max = 200)
     private String descripcion;
 
     @Column(name = "id_nivel_educativo")

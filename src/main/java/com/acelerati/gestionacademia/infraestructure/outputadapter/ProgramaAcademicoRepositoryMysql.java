@@ -1,8 +1,8 @@
 package com.acelerati.gestionacademia.infraestructure.outputadapter;
 
-import com.acelerati.gestionacademia.domain.ProgramaAcademico;
+import com.acelerati.gestionacademia.domain.model.ProgramaAcademico;
 import com.acelerati.gestionacademia.infraestructure.mapper.ProgramaAcademicoMapper;
-import com.acelerati.gestionacademia.infraestructure.outputport.ProgramaAcademicoJPARepository;
+import com.acelerati.gestionacademia.domain.port.ProgramaAcademicoJPARepository;
 import com.acelerati.gestionacademia.infraestructure.outputport.ProgramaAcademicoRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.acelerati.gestionacademia.infraestructure.outputport;
+package com.acelerati.gestionacademia.domain.port;
 
 import com.acelerati.gestionacademia.infraestructure.entity.ProgramaAcademicoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

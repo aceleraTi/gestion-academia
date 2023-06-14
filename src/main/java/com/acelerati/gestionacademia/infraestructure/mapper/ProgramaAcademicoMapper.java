@@ -1,6 +1,6 @@
 package com.acelerati.gestionacademia.infraestructure.mapper;
 
-import com.acelerati.gestionacademia.domain.ProgramaAcademico;
+import com.acelerati.gestionacademia.domain.model.ProgramaAcademico;
 import com.acelerati.gestionacademia.infraestructure.entity.ProgramaAcademicoEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
