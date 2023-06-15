@@ -36,5 +36,32 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now());
         return new ResponseEntity<>(apiError, httpStatus);
     }
+
+    @ExceptionHandler(value = {LongitudException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ApiError> longitudException(
+            HttpServletRequest request,
+            LongitudException apiRequestException) {
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        ApiError apiError = new ApiError(apiRequestException.getMessage(),
+                httpStatus,
+                httpStatus.value(),
+                LocalDateTime.now());
+        return new ResponseEntity<>(apiError, httpStatus);
+    }
+
+
+    @ExceptionHandler(value = {BadRequestException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ApiError> badRequestException(
+            HttpServletRequest request,
+            BadRequestException apiRequestException) {
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        ApiError apiError = new ApiError(apiRequestException.getMessage(),
+                httpStatus,
+                httpStatus.value(),
+                LocalDateTime.now());
+        return new ResponseEntity<>(apiError, httpStatus);
+    }
 }
 

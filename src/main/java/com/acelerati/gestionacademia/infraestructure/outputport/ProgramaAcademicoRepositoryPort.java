@@ -1,11 +1,17 @@
 package com.acelerati.gestionacademia.infraestructure.outputport;
 
-import com.acelerati.gestionacademia.domain.model.ProgramaAcademico;
+import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 
 public interface ProgramaAcademicoRepositoryPort {
 
-    ProgramaAcademico save(ProgramaAcademico programaAcademico);
+    ProgramaAcademico crearProgramaAcademico(ProgramaAcademico programaAcademico);
 
-    void deleteById(Long idProgramaAcademico);
+    Boolean existeId(Long id);
+
+    void eliminarId(Long idProgramaAcademico);
+
+    ProgramaAcademico buscarId(Long id);
+
+    Boolean existeNombre(String nombre);
 }
 

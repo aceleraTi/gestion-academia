@@ -1,6 +1,6 @@
 package com.acelerati.gestionacademia.infraestructure.mapper;
 
-import com.acelerati.gestionacademia.domain.model.ProgramaAcademico;
+import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 import com.acelerati.gestionacademia.infraestructure.entity.ProgramaAcademicoEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -10,7 +10,12 @@ import org.mapstruct.Mapping;
 public interface ProgramaAcademicoMapper {
 
 
+//    @Mapping(target = "pensumEntities", ignore = true)
     ProgramaAcademico toProgramaAcademico(ProgramaAcademicoEntity programaAcademicoEntity);
+
+
+    //    @Mapping(target = "pensumEntities", ignore = true)
+//    ProgramaAcademico toBuscarProgramaAcademico(ProgramaAcademicoEntity programaAcademicoEntity);
 
 
     @InheritInverseConfiguration

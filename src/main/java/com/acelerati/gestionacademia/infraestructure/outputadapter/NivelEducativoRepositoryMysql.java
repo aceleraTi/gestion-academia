@@ -1,12 +1,11 @@
 package com.acelerati.gestionacademia.infraestructure.outputadapter;
 
-import com.acelerati.gestionacademia.domain.port.NivelEducativoJPARepository;
+import com.acelerati.gestionacademia.infraestructure.outputport.jparepository.NivelEducativoJPARepository;
 import com.acelerati.gestionacademia.infraestructure.outputport.NivelEducativoRepositoryPort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 @RequiredArgsConstructor
 public class NivelEducativoRepositoryMysql implements NivelEducativoRepositoryPort {
 
@@ -14,7 +13,7 @@ public class NivelEducativoRepositoryMysql implements NivelEducativoRepositoryPo
 
 
     @Override
-    public Boolean existsById(Long idNivelEducativo) {
-        return this.nivelEducativoJPARepository.existsById(idNivelEducativo);
+    public Boolean existeId(Long id) {
+        return this.nivelEducativoJPARepository.existsById(id);
     }
 }
