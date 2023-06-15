@@ -20,12 +20,8 @@ public class ProgramaAcademicoEntity {
     private Long id;
 
     @Column(unique = true)
-    @Size(min = 8, max = 40, message = "El nombre del programa debe tener una longitud de 8" +
-            " a 40 caracteres.")
-    @Pattern(regexp = "^[ A-Za-zñÑáéíóúÁÉÍÓÚ]+$", message = "El nombre solo debe tener letras.")
     private String nombre;
 
-    @Size(min = 20, max = 200)
     private String descripcion;
 
     @Column(name = "id_nivel_educativo")

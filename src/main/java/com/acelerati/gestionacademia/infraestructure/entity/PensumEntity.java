@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.List;
 
 @Getter
@@ -17,8 +18,8 @@ public class PensumEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "anno")
-    private LocalDate anio;
+    @Column(name = "annio")
+    private Integer anio;
 
     @Column(name = "id_programa_academico")
     private Long idProgramaAcademico;
