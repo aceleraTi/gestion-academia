@@ -14,5 +14,5 @@ public class MateriaGetDto {
 
     private String descripcion;
 
-    private Materia materiaPrerequisito;
+    private MateriaGetDto materiaPrerequisito;
 }

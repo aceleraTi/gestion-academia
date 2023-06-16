@@ -12,6 +12,8 @@ import java.util.Objects;
 @Setter
 public class Materia {
 
+    private static final String ERROR_PREREQUISITO = "Materia prerequisito pensum diferente";
+
 
     private Long id;
 
@@ -30,14 +32,14 @@ public class Materia {
         ValidacionGeneral.validarLongitud(this.nombre, "nombre", 2, 30);
     }
 
-    public void validarDescripcion(){
+    public void validarDescripcion() {
         ValidacionGeneral.validarLongitud(descripcion, "descripcion", 6, 199);
     }
 
 
     public void validarPrerequisito() {
         if (!Objects.equals(this.materiaPrerequisito.idPensum, this.idPensum)) {
-            throw new BadRequestException("Materia prerequisito pensum diferente");
+            throw new BadRequestException(ERROR_PREREQUISITO);
         }
     }
 }

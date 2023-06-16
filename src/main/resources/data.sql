@@ -25,3 +25,9 @@ values
 ("Calculo 1", "Matematicas descripcion testttt", 1),
 ("Estadistica 1", "Estadistica descripcion testttt", 2)
 ;
+
+
+INSERT INTO materia (nombre, descripcion, id_pensum,id_materia_prerequisito)
+values
+("Calculo 2", "Matematicas descripcion testttt", 1,1)
+;
