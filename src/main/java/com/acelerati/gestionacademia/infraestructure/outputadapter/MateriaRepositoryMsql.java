@@ -20,6 +20,13 @@ public class MateriaRepositoryMsql implements MateriaRepositoryPort {
     private final MateriaMapper materiaMapper;
 
     @Override
+    public Materia crearMateria(Materia materia) {
+        return this.materiaMapper.toMateria(
+                this.materiaJPARepository
+                        .save(this.materiaMapper.toMateriaEntity(materia)));
+    }
+
+    @Override
     public Materia buscarId(Long id) {
         return this.materiaJPARepository.findById(id)
                 .map(this.materiaMapper::toMateria)

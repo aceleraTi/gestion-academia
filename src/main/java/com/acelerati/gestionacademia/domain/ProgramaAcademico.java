@@ -1,5 +1,6 @@
 package com.acelerati.gestionacademia.domain;
 
+import com.acelerati.gestionacademia.domain.util.ValidacionGeneral;
 import com.acelerati.gestionacademia.infraestructure.exception.ExistePensumException;
 import com.acelerati.gestionacademia.infraestructure.exception.LongitudException;
 import com.acelerati.gestionacademia.infraestructure.exception.SoloLetrasException;
@@ -20,8 +21,6 @@ public class ProgramaAcademico {
     private static final String ERROR_LETRAS = "el nombre debe contener solo letras";
     private static final String ERROR_EXISTE_PENSUM = "no se puede crear mas de 1 pensum para el mismo " +
             "anio";
-    private static final String ERROR_LONGITUD = "la longitud del campo %s es de %s a %s " +
-            "caracteres";
 
 
     private Long id;
@@ -50,10 +49,10 @@ public class ProgramaAcademico {
                              Long idNivelEducativo, Long idDirector,
                              List<Pensum> pensumEntities) {
         this.id = id;
-        this.validarLongitud(nombre, "nombre", 8, 40);
+        ValidacionGeneral.validarLongitud(nombre, "nombre", 8, 40);
         this.validarLetras(nombre);
         this.nombre = nombre;
-        this.validarLongitud(descripcion, "descripcion", 20, 200);
+        ValidacionGeneral.validarLongitud(descripcion, "descripcion", 20, 200);
         this.descripcion = descripcion;
         this.idNivelEducativo = idNivelEducativo;
         this.idDirector = idDirector;
@@ -70,13 +69,6 @@ public class ProgramaAcademico {
             if (nombre.charAt(i) > 90 && nombre.charAt(i) < 97) {
                 throw new SoloLetrasException(ERROR_LETRAS);
             }
-        }
-    }
-
-    public void validarLongitud(String nombre, String campo, int min, int max) {
-        int tamanio = nombre.length();
-        if (tamanio < min || tamanio > max) {
-            throw new LongitudException(String.format(ERROR_LONGITUD, campo, min, max));
         }
     }
 

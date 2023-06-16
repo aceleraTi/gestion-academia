@@ -13,8 +13,17 @@ public class MateriaCasoUso implements MateriaPort {
     private final MateriaRepositoryPort materiaRepositoryPort;
 
     @Override
+    public Materia crearMateria(Materia materia) {
+        if (materia.getIdMateriaPrerequisito() != null) {
+            materia.setMateriaEntityPrerequisito(this.obtenerMateria(materia.getIdMateriaPrerequisito()));
+            materia.validarPrerequisito();
+        }
+        return this.materiaRepositoryPort.crearMateria(materia);
+    }
+
+    @Override
     public Materia obtenerMateria(Long id) {
-        return null;
+        return this.materiaRepositoryPort.buscarId(id);
     }
 
     @Override
