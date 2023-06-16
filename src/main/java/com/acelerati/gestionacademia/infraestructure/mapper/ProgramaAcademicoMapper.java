@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 public interface ProgramaAcademicoMapper {
 
 
-//    @Mapping(target = "pensumEntities", ignore = true)
+    @Mapping(target = "pensums", source = "pensumEntities")
     ProgramaAcademico toProgramaAcademico(ProgramaAcademicoEntity programaAcademicoEntity);
 
 

@@ -12,23 +12,10 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = {SoloLetrasException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ApiError> letterNoValidException(
-            HttpServletRequest request, SoloLetrasException apiRequestException) {
-        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-        ApiError apiError = new ApiError(apiRequestException.getMessage(),
-                httpStatus,
-                httpStatus.value(),
-                LocalDateTime.now());
-        return new ResponseEntity<>(apiError, httpStatus);
-    }
-
-
-    @ExceptionHandler(value = {NoExisteNivelEducativoException.class})
+    @ExceptionHandler(value = {NotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<ApiError> noExisteNivelEducativoException(
-            HttpServletRequest request, NoExisteNivelEducativoException apiRequestException) {
+    public ResponseEntity<ApiError> notFoundExceptionException(
+            HttpServletRequest request, NotFoundException apiRequestException) {
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
         ApiError apiError = new ApiError(apiRequestException.getMessage(),
                 httpStatus,
@@ -37,18 +24,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiError, httpStatus);
     }
 
-    @ExceptionHandler(value = {LongitudException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ApiError> longitudException(
-            HttpServletRequest request,
-            LongitudException apiRequestException) {
-        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-        ApiError apiError = new ApiError(apiRequestException.getMessage(),
-                httpStatus,
-                httpStatus.value(),
-                LocalDateTime.now());
-        return new ResponseEntity<>(apiError, httpStatus);
-    }
+
+
 
 
     @ExceptionHandler(value = {BadRequestException.class})

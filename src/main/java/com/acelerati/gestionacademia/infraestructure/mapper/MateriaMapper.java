@@ -18,6 +18,7 @@ import java.util.List;
 public interface MateriaMapper {
 
 
+    @Mapping(target = "materiaPrerequisito", source = "materiaEntityPrerequisito")
     Materia toMateria(MateriaEntity materia);
 
 
@@ -25,8 +26,8 @@ public interface MateriaMapper {
     List<Materia> toMaterias(List<MateriaEntity> materiaEntities);
 
     @InheritInverseConfiguration
-    @Mapping(target = "pensumEntity")
-    @Mapping(target = "materiaEntityPrerequisito")
+    @Mapping(target = "pensumEntity", ignore = true)
+    @Mapping(target = "materiaEntityPrerequisito", ignore = true)
     MateriaEntity toMateriaEntity(Materia materia);
 
 }

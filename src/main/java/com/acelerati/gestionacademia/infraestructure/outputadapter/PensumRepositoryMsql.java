@@ -27,6 +27,7 @@ public class PensumRepositoryMsql implements PensumRepositoryPort {
 
     @Override
     public void eliminarId(Long id) {
+        this.pensumJPARepository.deleteById(id);
 
     }
 
