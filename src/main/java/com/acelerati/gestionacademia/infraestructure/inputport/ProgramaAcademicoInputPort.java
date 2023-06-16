@@ -6,7 +6,7 @@ public interface ProgramaAcademicoInputPort {
 
     ProgramaAcademico crearProgramaAcademico(ProgramaAcademico programaAcademico);
 
-    Boolean existePorId(Long id);
+//    Boolean existePorId(Long id);
 
     ProgramaAcademico buscarId(Long id);
 
@@ -14,5 +14,8 @@ public interface ProgramaAcademicoInputPort {
 
 
     void eliminarId(Long id);
+
+
+    void asignarDirector(Long idPrograma, Long idDirector);
 }
 

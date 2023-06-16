@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 
 public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
 
@@ -21,6 +20,11 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
 
     private final ProgramaAcademicoRepositoryPort programaAcademicoRepositoryPort;
 
+
+    public ProgramaAcademicoCasoUso(NivelEducativoPort nivelEducativoPort, ProgramaAcademicoRepositoryPort programaAcademicoRepositoryPort) {
+        this.nivelEducativoPort = nivelEducativoPort;
+        this.programaAcademicoRepositoryPort = programaAcademicoRepositoryPort;
+    }
 
     @Override
     public ProgramaAcademico crearProgramaAcademico(ProgramaAcademico programaAcademico) {
@@ -38,10 +42,10 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
         return this.programaAcademicoRepositoryPort.crearProgramaAcademico(programaAcademico);
     }
 
-    @Override
-    public Boolean existePorId(Long id) {
-        return this.programaAcademicoRepositoryPort.existeId(id);
-    }
+//    @Override
+//    public Boolean existePorId(Long id) {
+//        return this.programaAcademicoRepositoryPort.existeId(id);
+//    }
 
     @Override
     public ProgramaAcademico buscarId(Long id) {
@@ -59,5 +63,14 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
         programaAcademico.validarDirector();
         programaAcademico.validarConPensum();
         this.programaAcademicoRepositoryPort.eliminarId(id);
+    }
+
+    @Override
+    public void asignarDirector(Long idPrograma, Long idDirector) {
+        ProgramaAcademico programaAcademico = this.buscarId(idPrograma);
+        programaAcademico.validarDirector();
+        programaAcademico.setIdDirector(idDirector);
+        this.programaAcademicoRepositoryPort.actualizarDirector(idPrograma,
+                idDirector);
     }
 }
