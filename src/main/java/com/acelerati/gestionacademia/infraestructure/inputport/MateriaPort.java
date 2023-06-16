@@ -1,7 +1,8 @@
 package com.acelerati.gestionacademia.infraestructure.inputport;
 
 import com.acelerati.gestionacademia.domain.Materia;
-import com.acelerati.gestionacademia.domain.Pensum;
+
+import java.util.List;
 
 public interface MateriaPort {
 
@@ -11,5 +12,7 @@ public interface MateriaPort {
     Materia obtenerMateria(Long id);
 
     Boolean existeMateria(Long id);
+
+    List<Materia> materiasIdPensum(Long idPensum);
 
 }
