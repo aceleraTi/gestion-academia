@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface PensumMapper {
 
+    @Mapping(target = "materias", source = "materiaEntities")
     Pensum toPensum(PensumEntity pensumEntity);
 
 

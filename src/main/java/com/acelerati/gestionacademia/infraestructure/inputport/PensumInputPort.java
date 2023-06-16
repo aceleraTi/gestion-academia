@@ -9,4 +9,6 @@ public interface PensumInputPort {
     Pensum obtenerPensum(Long id);
 
     Boolean existePensum(Long id);
+
+    void eliminarId(Long id);
 }

@@ -12,7 +12,8 @@ values ('IngenieriaSistemas','Descripcion ingenieria de sistemas, descripcion', 
 INSERT INTO pensum(annio, id_programa_academico)
 values
 (2022,1),
-(2023,1)
+(2023,1),
+(2025,1)
 ;
 
 INSERT INTO materia (nombre, descripcion, id_pensum)

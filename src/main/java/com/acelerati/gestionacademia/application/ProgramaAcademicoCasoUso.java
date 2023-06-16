@@ -2,7 +2,7 @@ package com.acelerati.gestionacademia.application;
 
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
-import com.acelerati.gestionacademia.infraestructure.exception.NoExisteNivelEducativoException;
+import com.acelerati.gestionacademia.infraestructure.exception.NotFoundException;
 import com.acelerati.gestionacademia.infraestructure.inputport.NivelEducativoPort;
 import com.acelerati.gestionacademia.infraestructure.inputport.ProgramaAcademicoInputPort;
 import com.acelerati.gestionacademia.infraestructure.outputport.ProgramaAcademicoRepositoryPort;
@@ -24,12 +24,16 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
 
     @Override
     public ProgramaAcademico crearProgramaAcademico(ProgramaAcademico programaAcademico) {
+        programaAcademico.validarLongitudNombre();
+        programaAcademico.validarLetras();
+        programaAcademico.validarLongitudDescripcion();
+
         if (this.existeNombre(programaAcademico.getNombre())) {
             throw new BadRequestException(NOMBRE_PROGRAMA_UNICO);
         }
 
         if (!this.nivelEducativoPort.existeId(programaAcademico.getIdNivelEducativo())) {
-            throw new NoExisteNivelEducativoException(NO_EXISTE_NIVEL_EDUCATIVO);
+            throw new NotFoundException(NO_EXISTE_NIVEL_EDUCATIVO);
         }
         return this.programaAcademicoRepositoryPort.crearProgramaAcademico(programaAcademico);
     }

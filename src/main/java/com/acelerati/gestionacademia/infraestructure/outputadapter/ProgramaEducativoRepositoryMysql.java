@@ -1,7 +1,7 @@
 package com.acelerati.gestionacademia.infraestructure.outputadapter;
 
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
-import com.acelerati.gestionacademia.infraestructure.exception.NoExisteProgramaAcademicoException;
+import com.acelerati.gestionacademia.infraestructure.exception.NotFoundException;
 import com.acelerati.gestionacademia.infraestructure.mapper.ProgramaAcademicoMapper;
 import com.acelerati.gestionacademia.infraestructure.outputport.jparepository.ProgramaAcademicoJPARepository;
 import com.acelerati.gestionacademia.infraestructure.outputport.ProgramaAcademicoRepositoryPort;
@@ -37,7 +37,7 @@ public class ProgramaEducativoRepositoryMysql implements
     public ProgramaAcademico buscarId(Long id) {
         return this.programaAcademicoRepository.findById(id)
                 .map(this.programaAcademicoMapper::toProgramaAcademico)
-                .orElseThrow(() -> new NoExisteProgramaAcademicoException(NO_EXISTE_PROGRAMA_ACADEMICO));
+                .orElseThrow(() -> new NotFoundException(NO_EXISTE_PROGRAMA_ACADEMICO));
     }
 
     @Override
