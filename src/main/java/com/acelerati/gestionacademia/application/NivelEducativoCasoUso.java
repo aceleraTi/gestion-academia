@@ -4,12 +4,17 @@ import com.acelerati.gestionacademia.infraestructure.inputport.NivelEducativoPor
 import com.acelerati.gestionacademia.infraestructure.outputport.NivelEducativoRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-@RequiredArgsConstructor
+@Service
 public class NivelEducativoCasoUso implements NivelEducativoPort {
 
     private final NivelEducativoRepositoryPort nivelEducativoRepositoryPort;
+
+
+    public NivelEducativoCasoUso(NivelEducativoRepositoryPort nivelEducativoRepositoryPort) {
+        this.nivelEducativoRepositoryPort = nivelEducativoRepositoryPort;
+    }
 
     @Override
     public Boolean existeId(Long id) {

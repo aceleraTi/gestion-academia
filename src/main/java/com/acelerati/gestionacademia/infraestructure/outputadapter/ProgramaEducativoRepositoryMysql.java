@@ -46,6 +46,11 @@ public class ProgramaEducativoRepositoryMysql implements
     }
 
     @Override
+    public int actualizarDirector(Long idPrograma, Long idDirector) {
+        return this.programaAcademicoRepository.actualizarDirector(idPrograma, idDirector);
+    }
+
+    @Override
     public Boolean existeId(Long id) {
 
         return this.programaAcademicoRepository.existsById(id);

@@ -18,7 +18,7 @@ public class ProgramaAcademico {
     private static final String ERROR_LETRAS = "el nombre debe contener solo letras";
     private static final String ERROR_EXISTE_PENSUM = "no se puede crear mas de 1 pensum para el mismo " +
             "anio";
-    private static final String ERROR_DIRECTOR = "no se puede eliminar, tiene un director asignado";
+    private static final String ERROR_DIRECTOR = "tiene un director asignado";
 
     private static final String ERROR_PENSUM = "no se puede eliminar, tiene pensums asociados";
 

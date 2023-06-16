@@ -34,10 +34,22 @@ public class ProgramaAcademicoRest {
                 HttpStatus.CREATED);
     }
 
+    @PutMapping("{idPrograma}/{idDirector}")
+    public ResponseEntity<ProgramaAcademicoPostDto> asignarDirector(
+            @PathVariable Long idPrograma, @PathVariable Long idDirector
+    ) {
+        this.programaAcademicoInputPort.asignarDirector(idPrograma, idDirector);
+        return ResponseEntity.noContent().build();
+
+    }
+
+
     @DeleteMapping("{id}")
     @Operation(summary = "Eliminar Programa Academico")
     public ResponseEntity<?> eliminarProgramaAcademico(@PathVariable Long id) {
         this.programaAcademicoInputPort.eliminarId(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }
