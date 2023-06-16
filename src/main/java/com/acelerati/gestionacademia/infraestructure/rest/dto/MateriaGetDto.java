@@ -14,5 +14,7 @@ public class MateriaGetDto {
 
     private String descripcion;
 
+    private PensumGetDto pensum;
+
     private MateriaGetDto materiaPrerequisito;
 }

@@ -1,8 +1,8 @@
 package com.acelerati.gestionacademia.infraestructure.rest;
 
-import com.acelerati.gestionacademia.domain.Pensum;
 import com.acelerati.gestionacademia.infraestructure.inputport.PensumInputPort;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumGetDto;
+import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumMateriaGetDto;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumPostDto;
 import com.acelerati.gestionacademia.infraestructure.rest.mapper.PensumDtoMapper;
 import io.swagger.v3.oas.annotations.Operation;

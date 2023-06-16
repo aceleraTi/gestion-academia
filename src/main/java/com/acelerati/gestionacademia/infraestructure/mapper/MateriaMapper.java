@@ -19,6 +19,7 @@ public interface MateriaMapper {
 
 
     @Mapping(target = "materiaPrerequisito", source = "materiaEntityPrerequisito")
+    @Mapping(target = "pensum", source = "pensumEntity")
     Materia toMateria(MateriaEntity materia);
 
 

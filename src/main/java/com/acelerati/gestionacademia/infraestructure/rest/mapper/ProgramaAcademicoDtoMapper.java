@@ -1,9 +1,6 @@
 package com.acelerati.gestionacademia.infraestructure.rest.mapper;
 
-import com.acelerati.gestionacademia.domain.Pensum;
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
-import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumGetDto;
-import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumPostDto;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.ProgramaAcademicoPostDto;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

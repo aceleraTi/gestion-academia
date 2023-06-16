@@ -1,5 +1,6 @@
 package com.acelerati.gestionacademia.infraestructure.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,7 @@ public class PensumEntity {
     private ProgramaAcademicoEntity programaAcademicoEntity;
 
 
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pensumEntity")
     private List<MateriaEntity> materiaEntities;
 }

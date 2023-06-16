@@ -23,6 +23,8 @@ public class Materia {
 
     private Long idPensum;
 
+    private Pensum pensum;
+
     private Long idMateriaPrerequisito;
 
     private Materia materiaPrerequisito;

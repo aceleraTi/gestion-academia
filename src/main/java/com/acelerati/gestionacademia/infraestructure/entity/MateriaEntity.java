@@ -1,6 +1,7 @@
 package com.acelerati.gestionacademia.infraestructure.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +28,7 @@ public class MateriaEntity {
     @Column(name = "id_materia_prerequisito")
     private Long idMateriaPrerequisito;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pensum", referencedColumnName = "id", updatable = false,
             insertable = false)

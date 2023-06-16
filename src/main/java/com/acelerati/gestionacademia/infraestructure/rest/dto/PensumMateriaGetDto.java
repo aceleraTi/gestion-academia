@@ -7,10 +7,12 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PensumGetDto {
+public class PensumMateriaGetDto {
 
     private Long id;
 
     private Integer anio;
+
+//    private List<MateriaGetDto> materias;
 
 }
