@@ -33,6 +33,9 @@ public class Materia {
     //    @JsonIgnore
     private Materia materiaEntityPrerequisito;
 
+    public Materia() {
+    }
+
     public Materia(Long id, String nombre, String descripcion, Long idPensum, Long idMateriaPrerequisito) {
         this.id = id;
         ValidacionGeneral.validarLongitud(nombre, "nombre", 2, 30);

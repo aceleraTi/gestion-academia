@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/materia")
 @RequiredArgsConstructor
@@ -32,6 +34,15 @@ public class MateriaRest {
         return new ResponseEntity<>(this.materiaPort.obtenerMateria(id),
                 HttpStatus.OK);
     }
+
+
+    @GetMapping("pensum/{idPensum}")
+    @Operation(summary = "Obtener las materias de un pensum")
+    public ResponseEntity<List<Materia>> obtenerMateriasPensum(@PathVariable Long idPensum) {
+        return new ResponseEntity<>(this.materiaPort.materiasIdPensum(idPensum),
+                HttpStatus.OK);
+    }
+
 
 //    @GetMapping()
 //    @Operation(summary = "True si existe una materia, false si no existe")

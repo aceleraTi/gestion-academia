@@ -10,6 +10,8 @@ import com.acelerati.gestionacademia.infraestructure.outputport.jparepository.Ma
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class MateriaRepositoryMsql implements MateriaRepositoryPort {
@@ -36,6 +38,12 @@ public class MateriaRepositoryMsql implements MateriaRepositoryPort {
     @Override
     public Boolean existeId(Long id) {
         return this.materiaJPARepository.existsById(id);
+    }
+
+    @Override
+    public List<Materia> materiasIdPensum(Long idPensum) {
+        return this.materiaMapper.toMaterias(
+                this.materiaJPARepository.findAllByIdPensum(idPensum));
     }
 
 }

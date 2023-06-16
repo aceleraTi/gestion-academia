@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MateriaMapper {
@@ -19,6 +20,9 @@ public interface MateriaMapper {
 
     Materia toMateria(MateriaEntity materia);
 
+
+    @Mapping(target = "pensumEntity", ignore = true)
+    List<Materia> toMaterias(List<MateriaEntity> materiaEntities);
 
     @InheritInverseConfiguration
     @Mapping(target = "pensumEntity")

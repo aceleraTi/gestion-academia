@@ -6,6 +6,8 @@ import com.acelerati.gestionacademia.infraestructure.outputport.MateriaRepositor
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class MateriaCasoUso implements MateriaPort {
@@ -29,5 +31,10 @@ public class MateriaCasoUso implements MateriaPort {
     @Override
     public Boolean existeMateria(Long id) {
         return null;
+    }
+
+    @Override
+    public List<Materia> materiasIdPensum(Long idPensum) {
+        return this.materiaRepositoryPort.materiasIdPensum(idPensum);
     }
 }
