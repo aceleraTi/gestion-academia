@@ -25,9 +25,6 @@ public class GlobalExceptionHandler {
     }
 
 
-
-
-
     @ExceptionHandler(value = {BadRequestException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ApiError> badRequestException(
@@ -40,5 +37,19 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now());
         return new ResponseEntity<>(apiError, httpStatus);
     }
+
+    @ExceptionHandler(value = {ConflictException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<ApiError> conflictException(
+            HttpServletRequest request,
+            ConflictException apiRequestException) {
+        HttpStatus httpStatus = HttpStatus.CONFLICT;
+        ApiError apiError = new ApiError(apiRequestException.getMessage(),
+                httpStatus,
+                httpStatus.value(),
+                LocalDateTime.now());
+        return new ResponseEntity<>(apiError, httpStatus);
+    }
+
 }
 

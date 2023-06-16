@@ -52,4 +52,12 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
     public Boolean existeNombre(String nombre) {
         return this.programaAcademicoRepositoryPort.existeNombre(nombre);
     }
+
+    @Override
+    public void eliminarId(Long id) {
+        ProgramaAcademico programaAcademico = this.buscarId(id);
+        programaAcademico.validarDirector();
+        programaAcademico.validarConPensum();
+        this.programaAcademicoRepositoryPort.eliminarId(id);
+    }
 }
