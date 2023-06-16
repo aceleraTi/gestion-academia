@@ -12,6 +12,11 @@ values
 ('IngenieriaSistema2s','2Descripcion ingenieria de sistemas, descripcion2', 2)
 ;
 
+INSERT INTO programa_academico(nombre,descripcion,id_nivel_educativo,id_director)
+values
+('IngenieriaSistemas5','Descripcion ingenieria de sistemas, descripcion', 1,1)
+;
+
 
 INSERT INTO pensum(annio, id_programa_academico)
 values

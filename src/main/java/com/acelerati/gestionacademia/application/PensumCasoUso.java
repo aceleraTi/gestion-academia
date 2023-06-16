@@ -9,18 +9,23 @@ import com.acelerati.gestionacademia.infraestructure.inputport.ProgramaAcademico
 import com.acelerati.gestionacademia.infraestructure.outputport.PensumRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
-@RequiredArgsConstructor
+@Service
 public class PensumCasoUso implements PensumInputPort {
 
     private final ProgramaAcademicoInputPort programaAcademicoInputPort;
 
     private final PensumRepositoryPort pensumRepositoryPort;
 
-    private final MateriaPort materiaPort;
+
+    public PensumCasoUso(ProgramaAcademicoInputPort programaAcademicoInputPort,
+                         PensumRepositoryPort pensumRepositoryPort) {
+        this.programaAcademicoInputPort = programaAcademicoInputPort;
+        this.pensumRepositoryPort = pensumRepositoryPort;
+    }
 
     @Override
     public Pensum crearPensum(Pensum pensum) {

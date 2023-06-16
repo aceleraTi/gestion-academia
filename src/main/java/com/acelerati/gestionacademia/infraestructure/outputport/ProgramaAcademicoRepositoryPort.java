@@ -13,5 +13,8 @@ public interface ProgramaAcademicoRepositoryPort {
     ProgramaAcademico buscarId(Long id);
 
     Boolean existeNombre(String nombre);
+
+    int actualizarDirector(Long idPrograma,
+                           Long idDirector);
 }
 
