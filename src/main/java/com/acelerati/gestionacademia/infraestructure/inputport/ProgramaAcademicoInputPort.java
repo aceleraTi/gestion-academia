@@ -11,5 +11,8 @@ public interface ProgramaAcademicoInputPort {
     ProgramaAcademico buscarId(Long id);
 
     Boolean existeNombre(String nombre);
+
+
+    void eliminarId(Long id);
 }
 

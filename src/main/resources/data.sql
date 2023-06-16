@@ -7,7 +7,11 @@ values ("educación primaria", " escuela primaria (grados 1 a 6)"),
 
 
 INSERT INTO programa_academico(nombre,descripcion,id_nivel_educativo)
-values ('IngenieriaSistemas','Descripcion ingenieria de sistemas, descripcion', 1);
+values
+('IngenieriaSistemas','Descripcion ingenieria de sistemas, descripcion', 1),
+('IngenieriaSistema2s','2Descripcion ingenieria de sistemas, descripcion2', 2)
+;
+
 
 INSERT INTO pensum(annio, id_programa_academico)
 values

@@ -2,6 +2,7 @@ package com.acelerati.gestionacademia.domain;
 
 import com.acelerati.gestionacademia.domain.util.ValidacionGeneral;
 import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
+import com.acelerati.gestionacademia.infraestructure.exception.ConflictException;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
@@ -17,6 +18,10 @@ public class ProgramaAcademico {
     private static final String ERROR_LETRAS = "el nombre debe contener solo letras";
     private static final String ERROR_EXISTE_PENSUM = "no se puede crear mas de 1 pensum para el mismo " +
             "anio";
+    private static final String ERROR_DIRECTOR = "no se puede eliminar, tiene un director asignado";
+
+    private static final String ERROR_PENSUM = "no se puede eliminar, tiene pensums asociados";
+
 
     private Long id;
 
@@ -57,5 +62,16 @@ public class ProgramaAcademico {
         }
     }
 
+    public void validarDirector() {
+        if (this.idDirector != null) {
+            throw new ConflictException(ERROR_DIRECTOR);
+        }
+    }
+
+    public void validarConPensum() {
+        if (this.pensums.size() > 0) {
+            throw new ConflictException(ERROR_PENSUM);
+        }
+    }
 }
 

@@ -1,6 +1,6 @@
 package com.acelerati.gestionacademia.domain;
 
-import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
+import com.acelerati.gestionacademia.infraestructure.exception.ConflictException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +24,7 @@ public class Pensum {
 
     public void validarMateriaAsignadas() {
         if (materias.size() > 0) {
-            throw new BadRequestException(MATERIA_ASIGNADA);
+            throw new ConflictException(MATERIA_ASIGNADA);
         }
     }
 
