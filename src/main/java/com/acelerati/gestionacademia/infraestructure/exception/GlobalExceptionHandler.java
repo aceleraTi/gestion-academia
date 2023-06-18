@@ -51,5 +51,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiError, httpStatus);
     }
 
+    @ExceptionHandler(value = {ForbiddenException.class})
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ResponseEntity<ApiError> conflictException(
+            HttpServletRequest request,
+            ForbiddenException apiRequestException) {
+        HttpStatus httpStatus = HttpStatus.FORBIDDEN;
+        ApiError apiError = new ApiError(apiRequestException.getMessage(),
+                httpStatus,
+                httpStatus.value(),
+                LocalDateTime.now());
+        return new ResponseEntity<>(apiError, httpStatus);
+    }
+
 }
 

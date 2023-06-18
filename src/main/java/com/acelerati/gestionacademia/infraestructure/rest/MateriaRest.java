@@ -1,11 +1,15 @@
 package com.acelerati.gestionacademia.infraestructure.rest;
 
-import com.acelerati.gestionacademia.domain.Materia;
+import com.acelerati.gestionacademia.domain.TipoUsuario;
 import com.acelerati.gestionacademia.infraestructure.inputport.MateriaPort;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.MateriaGetDto;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.MateriaPostDto;
 import com.acelerati.gestionacademia.infraestructure.rest.mapper.MateriaDtoMapper;
+import com.acelerati.gestionacademia.infraestructure.rest.resttemplete.RestTemplePort;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,9 +28,21 @@ public class MateriaRest {
 
     private final MateriaDtoMapper mapper;
 
+    private final RestTemplePort restTemplate;
+
+
     @PostMapping()
-    @Operation(summary = "Agregar materia al pensum")
-    public ResponseEntity<MateriaPostDto> crearMateria(@RequestBody MateriaPostDto materia) {
+    @Operation(summary = "Agregar materia al pensum",
+            parameters = {
+                    @Parameter(in = ParameterIn.HEADER,
+                            name = "idusuario",
+                            description = "id del usuario",
+                            required = true,
+                            schema = @Schema(type = "integer"))
+            })
+    public ResponseEntity<MateriaPostDto> crearMateria(@RequestBody MateriaPostDto materia,
+                                                       @RequestHeader(value = "idusuario") Long idUsuario) {
+        this.restTemplate.tienePermiso(idUsuario, TipoUsuario.DIRECTOR.getId());
         return new ResponseEntity<>(
                 this.mapper.toMateriaPostDto(
                         this.materiaPort.crearMateria(
@@ -49,7 +65,6 @@ public class MateriaRest {
     @Operation(summary = "Obtener las materias de un pensum")
     public ResponseEntity<List<MateriaGetDto>> obtenerMateriasPensum(@PathVariable Long idPensum) {
         return new ResponseEntity<>(
-
                 this.mapper.toMateriaGetDtos(
                         this.materiaPort.materiasIdPensum(idPensum)),
                 HttpStatus.OK);
