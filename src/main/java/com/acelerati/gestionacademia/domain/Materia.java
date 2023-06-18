@@ -11,7 +11,8 @@ import java.util.Objects;
 @Setter
 public class Materia {
 
-    private static final String ERROR_PREREQUISITO = "Materia prerequisito pensum diferente";
+    private static final String ERROR_PREREQUISITO = "materia prerequisito es de un pensum " +
+            "diferente";
 
 
     private Long id;

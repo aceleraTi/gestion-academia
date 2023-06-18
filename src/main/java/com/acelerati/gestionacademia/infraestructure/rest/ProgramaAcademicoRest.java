@@ -4,6 +4,7 @@ import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 import com.acelerati.gestionacademia.domain.TipoUsuario;
 import com.acelerati.gestionacademia.infraestructure.inputport.ProgramaAcademicoInputPort;
 import com.acelerati.gestionacademia.infraestructure.mapper.ProgramaAcademicoMapper;
+import com.acelerati.gestionacademia.infraestructure.rest.dto.ProgramaAcademicoGetDto;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.ProgramaAcademicoPostDto;
 import com.acelerati.gestionacademia.infraestructure.rest.mapper.ProgramaAcademicoDtoMapper;
 import com.acelerati.gestionacademia.infraestructure.rest.resttemplete.RestTemplePort;
@@ -85,12 +86,13 @@ public class ProgramaAcademicoRest {
                             schema = @Schema(type = "integer"))
             }
     )
-    public ResponseEntity<?> eliminarProgramaAcademico(@PathVariable Long id,
-                                                       @RequestHeader(value = "idusuario")
-                                                       Long idUsuario) {
+    public ResponseEntity<ProgramaAcademicoGetDto> eliminarProgramaAcademico(@PathVariable Long id,
+                                                                             @RequestHeader(value = "idusuario")
+                                                                             Long idUsuario) {
         this.restTemplate.tienePermiso(idUsuario, TipoUsuario.DECANO.getId());
-        this.programaAcademicoInputPort.eliminarId(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(
+                this.mapper.toProgramaAcademicoGetDto(
+                        this.programaAcademicoInputPort.eliminarId(id)), HttpStatus.OK);
     }
 
 

@@ -1,6 +1,7 @@
 package com.acelerati.gestionacademia.infraestructure.outputadapter;
 
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
+import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
 import com.acelerati.gestionacademia.infraestructure.exception.NotFoundException;
 import com.acelerati.gestionacademia.infraestructure.mapper.ProgramaAcademicoMapper;
 import com.acelerati.gestionacademia.infraestructure.outputport.jparepository.ProgramaAcademicoJPARepository;
@@ -30,14 +31,14 @@ public class ProgramaEducativoRepositoryMysql implements
 
     @Override
     public void eliminarId(Long idProgramaAcademico) {
-
+        this.programaAcademicoRepository.deleteById(idProgramaAcademico);
     }
 
     @Override
     public ProgramaAcademico buscarId(Long id) {
         return this.programaAcademicoRepository.findById(id)
                 .map(this.programaAcademicoMapper::toProgramaAcademico)
-                .orElseThrow(() -> new NotFoundException(NO_EXISTE_PROGRAMA_ACADEMICO));
+                .orElseThrow(() -> new BadRequestException(NO_EXISTE_PROGRAMA_ACADEMICO));
     }
 
     @Override

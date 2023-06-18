@@ -1,5 +1,6 @@
 package com.acelerati.gestionacademia.infraestructure.inputport;
 
+import com.acelerati.gestionacademia.domain.Pensum;
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 
 public interface ProgramaAcademicoInputPort {
@@ -13,9 +14,9 @@ public interface ProgramaAcademicoInputPort {
     Boolean existeNombre(String nombre);
 
 
-    void eliminarId(Long id);
+    ProgramaAcademico eliminarId(Long id);
 
 
-    void asignarDirector(Long idPrograma, Long idDirector);
+    ProgramaAcademico asignarDirector(Long idPrograma, Long idDirector);
 }
 

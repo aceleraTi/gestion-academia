@@ -1,5 +1,6 @@
 package com.acelerati.gestionacademia.application;
 
+import com.acelerati.gestionacademia.domain.Pensum;
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
 import com.acelerati.gestionacademia.infraestructure.exception.NotFoundException;
@@ -29,12 +30,13 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
     @Override
     public ProgramaAcademico crearProgramaAcademico(ProgramaAcademico programaAcademico) {
         programaAcademico.validarLongitudNombre();
-        programaAcademico.validarLetras();
-        programaAcademico.validarLongitudDescripcion();
 
         if (this.existeNombre(programaAcademico.getNombre())) {
             throw new BadRequestException(NOMBRE_PROGRAMA_UNICO);
         }
+
+        programaAcademico.validarLetras();
+        programaAcademico.validarLongitudDescripcion();
 
         if (!this.nivelEducativoPort.existeId(programaAcademico.getIdNivelEducativo())) {
             throw new NotFoundException(NO_EXISTE_NIVEL_EDUCATIVO);
@@ -42,10 +44,6 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
         return this.programaAcademicoRepositoryPort.crearProgramaAcademico(programaAcademico);
     }
 
-//    @Override
-//    public Boolean existePorId(Long id) {
-//        return this.programaAcademicoRepositoryPort.existeId(id);
-//    }
 
     @Override
     public ProgramaAcademico buscarId(Long id) {
@@ -58,19 +56,21 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
     }
 
     @Override
-    public void eliminarId(Long id) {
+    public ProgramaAcademico eliminarId(Long id) {
         ProgramaAcademico programaAcademico = this.buscarId(id);
         programaAcademico.validarDirector();
         programaAcademico.validarConPensum();
         this.programaAcademicoRepositoryPort.eliminarId(id);
+        return programaAcademico;
     }
 
     @Override
-    public void asignarDirector(Long idPrograma, Long idDirector) {
+    public ProgramaAcademico asignarDirector(Long idPrograma, Long idDirector) {
         ProgramaAcademico programaAcademico = this.buscarId(idPrograma);
         programaAcademico.validarDirector();
         programaAcademico.setIdDirector(idDirector);
         this.programaAcademicoRepositoryPort.actualizarDirector(idPrograma,
                 idDirector);
+        return programaAcademico;
     }
 }
