@@ -69,10 +69,12 @@ public class PensumRest {
                             required = true,
                             schema = @Schema(type = "integer"))
             })
-    public ResponseEntity<?> eliminarPensum(@PathVariable Long id,
-                                            @RequestHeader(value = "idusuario") Long idUsuario) {
+    public ResponseEntity<PensumGetDto> eliminarPensum(@PathVariable Long id,
+                                                       @RequestHeader(value = "idusuario") Long idUsuario) {
         this.restTemple.tienePermiso(idUsuario, TipoUsuario.DIRECTOR.getId());
-        this.pensumInputPort.eliminarId(id);
-        return ResponseEntity.noContent().build();
+
+        return new ResponseEntity<>(
+                this.mapper.toPensumGetDto(
+                        this.pensumInputPort.eliminarId(id)), HttpStatus.OK);
     }
 }

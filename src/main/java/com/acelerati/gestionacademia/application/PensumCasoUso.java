@@ -46,9 +46,10 @@ public class PensumCasoUso implements PensumInputPort {
     }
 
     @Override
-    public void eliminarId(Long id) {
+    public Pensum eliminarId(Long id) {
         Pensum pensum = this.obtenerPensum(id);
         pensum.validarMateriaAsignadas();
         this.pensumRepositoryPort.eliminarId(id);
+        return pensum;
     }
 }

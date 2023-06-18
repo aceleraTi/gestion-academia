@@ -2,6 +2,10 @@ package com.acelerati.gestionacademia.application.util;
 
 public class UtilProgramaAcademico {
 
+    public static final String ERROR_PENSUM = "no se puede eliminar, tiene pensums asociados";
+
+    public static final String ERROR_DIRECTOR = "tiene un director asignado";
+
     public static final String NO_EXISTE_PROGRAMA_ACADEMICO = "no existe un programa academico " +
             "con ese Id";
 

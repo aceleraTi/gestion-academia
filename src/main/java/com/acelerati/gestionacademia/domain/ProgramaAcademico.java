@@ -64,13 +64,13 @@ public class ProgramaAcademico {
 
     public void validarDirector() {
         if (this.idDirector != null) {
-            throw new ConflictException(ERROR_DIRECTOR);
+            throw new BadRequestException(ERROR_DIRECTOR);
         }
     }
 
     public void validarConPensum() {
         if (this.pensums.size() > 0) {
-            throw new ConflictException(ERROR_PENSUM);
+            throw new BadRequestException(ERROR_PENSUM);
         }
     }
 }

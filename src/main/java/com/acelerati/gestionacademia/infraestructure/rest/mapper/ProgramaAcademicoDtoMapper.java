@@ -1,6 +1,7 @@
 package com.acelerati.gestionacademia.infraestructure.rest.mapper;
 
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
+import com.acelerati.gestionacademia.infraestructure.rest.dto.ProgramaAcademicoGetDto;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.ProgramaAcademicoPostDto;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -12,7 +13,7 @@ public interface ProgramaAcademicoDtoMapper {
     ProgramaAcademicoPostDto toProgramaAcademicoPostDto(ProgramaAcademico programaAcademico);
 
 
-//    PensumGetDto toPensumGetDto(Pensum pensum);
+    ProgramaAcademicoGetDto toProgramaAcademicoGetDto(ProgramaAcademico programaAcademico);
 
     @InheritInverseConfiguration
     @Mapping(target = "pensums", ignore = true)

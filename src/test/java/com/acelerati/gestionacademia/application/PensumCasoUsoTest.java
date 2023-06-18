@@ -1,5 +1,6 @@
 package com.acelerati.gestionacademia.application;
 
+import com.acelerati.gestionacademia.domain.Materia;
 import com.acelerati.gestionacademia.domain.Pensum;
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
@@ -12,15 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.acelerati.gestionacademia.application.util.UtilMateria.MATERIA_NO_EXISTE;
-import static com.acelerati.gestionacademia.application.util.UtilPensum.ERROR_EXISTE_PENSUM;
-import static com.acelerati.gestionacademia.application.util.UtilPensum.NO_EXISTE_PENSUM;
+import static com.acelerati.gestionacademia.application.util.UtilPensum.*;
+import static com.acelerati.gestionacademia.application.util.UtilProgramaAcademico.ERROR_DIRECTOR;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class PensumCasoUsoTest {
     @InjectMocks
@@ -112,6 +112,35 @@ class PensumCasoUsoTest {
         assertFalse(aBoolean);
     }
 
+
+    @Test
+    void cuandoSeQuiereEliminarUnPensumPorIdConMateriasAsignadas() {
+        Pensum pensum = new Pensum();
+        pensum.setId(1L);
+        pensum.setMaterias(List.of(new Materia(), new Materia()));
+        when(this.pensumRepositoryPort.obtenerPensum(any())).thenReturn(pensum);
+
+        BadRequestException exception = assertThrows(BadRequestException.class,
+                () -> this.PensumCasoUso.eliminarId(any()));
+        assertNotNull(exception);
+        assertEquals(MATERIA_ASIGNADA, exception.getMessage());
+
+    }
+
+
+    @Test
+    void cuandoSeQuiereEliminarUnPensumoYSinMateriasAsignadas() {
+        Pensum pensum = new Pensum();
+        pensum.setId(1L);
+        pensum.setMaterias(new ArrayList<>());
+
+        when(this.pensumRepositoryPort.obtenerPensum(any())).thenReturn(pensum);
+
+        doNothing().when(pensumRepositoryPort).eliminarId(any());
+        Pensum pensum1 = this.PensumCasoUso.eliminarId(any());
+        assertNotNull(pensum1);
+
+    }
 
 
 }

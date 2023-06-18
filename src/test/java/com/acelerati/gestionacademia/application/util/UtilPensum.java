@@ -7,4 +7,7 @@ public class UtilPensum {
             "anio";
 
     public static final String NO_EXISTE_PENSUM = "el id del del pensum no existe";
+
+    public static final String MATERIA_ASIGNADA = "el pensum cuenta con materias asignadas";
+
 }

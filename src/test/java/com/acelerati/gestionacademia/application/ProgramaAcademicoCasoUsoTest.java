@@ -13,13 +13,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static com.acelerati.gestionacademia.application.util.UtilMateria.NOMBRE_2_CARACTER;
-import static com.acelerati.gestionacademia.application.util.UtilPensum.NO_EXISTE_PENSUM;
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.acelerati.gestionacademia.application.util.UtilProgramaAcademico.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
+
 
 class ProgramaAcademicoCasoUsoTest {
     @InjectMocks
@@ -268,6 +271,73 @@ class ProgramaAcademicoCasoUsoTest {
                 () -> this.programaAcademicoCasoUso.buscarId(any()));
         assertNotNull(exception);
         assertEquals(NO_EXISTE_PROGRAMA_ACADEMICO, exception.getMessage());
+    }
+
+    @Test
+    void cuandoSeQuiereEliminarUnProgramaAcademicoPorIdConUnDirectorAsignado() {
+        ProgramaAcademico programaAcademico = new ProgramaAcademico();
+        programaAcademico.setIdDirector(1L);
+        when(this.programaAcademicoCasoUso.buscarId(any())).thenReturn(programaAcademico);
+        BadRequestException exception = assertThrows(BadRequestException.class,
+                () -> this.programaAcademicoCasoUso.eliminarId(any()));
+        assertNotNull(exception);
+        assertEquals(ERROR_DIRECTOR, exception.getMessage());
+
+    }
+
+    @Test
+    void cuandoSeQuiereEliminarUnProgramaAcademicoPorIdSinUnDirectorAsignado() {
+        ProgramaAcademico programaAcademico = new ProgramaAcademico();
+        programaAcademico.setPensums(List.of(new Pensum()));
+        when(this.programaAcademicoCasoUso.buscarId(any())).thenReturn(programaAcademico);
+        BadRequestException exception = assertThrows(BadRequestException.class,
+                () -> this.programaAcademicoCasoUso.eliminarId(any()));
+        assertNotNull(exception);
+        assertEquals(ERROR_PENSUM, exception.getMessage());
+
+    }
+
+
+    @Test
+    void cuandoSeQuiereEliminarUnProgramaAcademicoPorIdSinUnDirectorAsignadoYSinPensums() {
+        ProgramaAcademico programaAcademico = new ProgramaAcademico();
+        programaAcademico.setId(1L);
+        programaAcademico.setPensums(new ArrayList<>());
+        when(this.programaAcademicoCasoUso.buscarId(any())).thenReturn(programaAcademico);
+
+        doNothing().when(programaAcademicoRepositoryPort).eliminarId(any());
+        ProgramaAcademico programaAcademico1 = this.programaAcademicoCasoUso.eliminarId(any());
+        assertNotNull(programaAcademico1);
+
+    }
+
+    @Test
+    void cuandoSeQuierAsignarUnDirectorAUnProgramaQueYaTieneDirector() {
+        ProgramaAcademico programaAcademico = new ProgramaAcademico();
+        programaAcademico.setId(1L);
+        programaAcademico.setIdDirector(2L);
+        when(this.programaAcademicoCasoUso.buscarId(any())).thenReturn(programaAcademico);
+
+
+        BadRequestException exception = assertThrows(BadRequestException.class,
+                () -> this.programaAcademicoCasoUso.asignarDirector(1L, 2L));
+        assertNotNull(exception);
+        assertEquals(ERROR_DIRECTOR, exception.getMessage());
+
+    }
+
+    @Test
+    void cuandoSeQuierAsignarUnDirectorAUnProgramaQueNoTieneDirector() {
+        ProgramaAcademico programaAcademico = new ProgramaAcademico();
+        programaAcademico.setId(1L);
+        when(this.programaAcademicoCasoUso.buscarId(any())).thenReturn(programaAcademico);
+
+        when(this.programaAcademicoRepositoryPort.actualizarDirector(any(), any())).thenReturn(1);
+
+        ProgramaAcademico programaAcademico1 = this.programaAcademicoCasoUso.asignarDirector(1L, 2L);
+
+        assertNotNull(programaAcademico1);
+
     }
 
 }

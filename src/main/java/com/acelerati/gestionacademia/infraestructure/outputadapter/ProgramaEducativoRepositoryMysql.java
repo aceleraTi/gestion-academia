@@ -31,7 +31,7 @@ public class ProgramaEducativoRepositoryMysql implements
 
     @Override
     public void eliminarId(Long idProgramaAcademico) {
-
+        this.programaAcademicoRepository.deleteById(idProgramaAcademico);
     }
 
     @Override
