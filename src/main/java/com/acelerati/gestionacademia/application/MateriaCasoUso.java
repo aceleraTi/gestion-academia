@@ -33,11 +33,6 @@ public class MateriaCasoUso implements MateriaPort {
     }
 
     @Override
-    public Boolean existeMateria(Long id) {
-        return null;
-    }
-
-    @Override
     public List<Materia> materiasIdPensum(Long idPensum) {
         return this.materiaRepositoryPort.materiasIdPensum(idPensum);
     }

@@ -11,7 +11,6 @@ public interface MateriaPort {
 
     Materia obtenerMateria(Long id);
 
-    Boolean existeMateria(Long id);
 
     List<Materia> materiasIdPensum(Long idPensum);
 

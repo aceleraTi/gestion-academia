@@ -29,12 +29,13 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
     @Override
     public ProgramaAcademico crearProgramaAcademico(ProgramaAcademico programaAcademico) {
         programaAcademico.validarLongitudNombre();
-        programaAcademico.validarLetras();
-        programaAcademico.validarLongitudDescripcion();
 
         if (this.existeNombre(programaAcademico.getNombre())) {
             throw new BadRequestException(NOMBRE_PROGRAMA_UNICO);
         }
+
+        programaAcademico.validarLetras();
+        programaAcademico.validarLongitudDescripcion();
 
         if (!this.nivelEducativoPort.existeId(programaAcademico.getIdNivelEducativo())) {
             throw new NotFoundException(NO_EXISTE_NIVEL_EDUCATIVO);
@@ -42,10 +43,6 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
         return this.programaAcademicoRepositoryPort.crearProgramaAcademico(programaAcademico);
     }
 
-//    @Override
-//    public Boolean existePorId(Long id) {
-//        return this.programaAcademicoRepositoryPort.existeId(id);
-//    }
 
     @Override
     public ProgramaAcademico buscarId(Long id) {
