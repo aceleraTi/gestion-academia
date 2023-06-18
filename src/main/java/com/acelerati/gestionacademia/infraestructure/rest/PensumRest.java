@@ -1,11 +1,16 @@
 package com.acelerati.gestionacademia.infraestructure.rest;
 
+import com.acelerati.gestionacademia.domain.TipoUsuario;
 import com.acelerati.gestionacademia.infraestructure.inputport.PensumInputPort;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumGetDto;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumMateriaGetDto;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumPostDto;
 import com.acelerati.gestionacademia.infraestructure.rest.mapper.PensumDtoMapper;
+import com.acelerati.gestionacademia.infraestructure.rest.resttemplete.RestTemplePort;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,9 +27,20 @@ public class PensumRest {
 
     private final PensumDtoMapper mapper;
 
+    private final RestTemplePort restTemple;
+
     @PostMapping()
-    @Operation(summary = "Crear un pensum")
-    public ResponseEntity<PensumPostDto> crearPensum(@RequestBody PensumPostDto pensum) {
+    @Operation(summary = "Crear un pensum",
+            parameters = {
+                    @Parameter(in = ParameterIn.HEADER,
+                            name = "idusuario",
+                            description = "id del usuario",
+                            required = true,
+                            schema = @Schema(type = "integer"))
+            })
+    public ResponseEntity<PensumPostDto> crearPensum(@RequestBody PensumPostDto pensum,
+                                                     @RequestHeader(value = "idusuario") Long idUsuario) {
+        this.restTemple.tienePermiso(idUsuario, TipoUsuario.DIRECTOR.getId());
         return new ResponseEntity<>(
                 this.mapper.toPensumPostDto(
                         this.pensumInputPort.crearPensum(
@@ -34,7 +50,8 @@ public class PensumRest {
 
 
     @GetMapping("{id}")
-    @Operation(summary = "Obtener un pensum")
+    @Operation(summary = "Obtener un pensum"
+    )
     public ResponseEntity<PensumGetDto> obtenerPensum(@PathVariable Long id) {
         return new ResponseEntity<>(
                 this.mapper.toPensumGetDto(
@@ -44,8 +61,17 @@ public class PensumRest {
 
 
     @DeleteMapping("{id}")
-    @Operation(summary = "Eliminar Pensum")
-    public ResponseEntity<?> eliminarPensum(@PathVariable Long id) {
+    @Operation(summary = "Eliminar Pensum",
+            parameters = {
+                    @Parameter(in = ParameterIn.HEADER,
+                            name = "idusuario",
+                            description = "id del usuario",
+                            required = true,
+                            schema = @Schema(type = "integer"))
+            })
+    public ResponseEntity<?> eliminarPensum(@PathVariable Long id,
+                                            @RequestHeader(value = "idusuario") Long idUsuario) {
+        this.restTemple.tienePermiso(idUsuario, TipoUsuario.DIRECTOR.getId());
         this.pensumInputPort.eliminarId(id);
         return ResponseEntity.noContent().build();
     }

@@ -3,8 +3,6 @@ package com.acelerati.gestionacademia.application;
 import com.acelerati.gestionacademia.domain.Materia;
 import com.acelerati.gestionacademia.infraestructure.inputport.MateriaPort;
 import com.acelerati.gestionacademia.infraestructure.outputport.MateriaRepositoryPort;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +18,7 @@ public class MateriaCasoUso implements MateriaPort {
 
     @Override
     public Materia crearMateria(Materia materia) {
-        materia.validarNombre();
+        materia.validarLongitudNombre();
         materia.validarDescripcion();
         if (materia.getIdMateriaPrerequisito() != null) {
             materia.setMateriaPrerequisito(this.obtenerMateria(materia.getIdMateriaPrerequisito()));

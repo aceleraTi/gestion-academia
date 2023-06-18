@@ -2,7 +2,6 @@ package com.acelerati.gestionacademia.domain;
 
 import com.acelerati.gestionacademia.domain.util.ValidacionGeneral;
 import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,7 +29,7 @@ public class Materia {
     private Materia materiaPrerequisito;
 
 
-    public void validarNombre() {
+    public void validarLongitudNombre() {
         ValidacionGeneral.validarLongitud(this.nombre, "nombre", 2, 30);
     }
 
