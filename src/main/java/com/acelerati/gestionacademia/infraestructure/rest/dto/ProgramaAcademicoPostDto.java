@@ -1,7 +1,5 @@
 package com.acelerati.gestionacademia.infraestructure.rest.dto;
 
-import com.acelerati.gestionacademia.domain.Pensum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;

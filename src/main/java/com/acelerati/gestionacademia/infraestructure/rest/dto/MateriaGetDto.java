@@ -1,6 +1,5 @@
 package com.acelerati.gestionacademia.infraestructure.rest.dto;
 
-import com.acelerati.gestionacademia.domain.Materia;
 import lombok.Getter;
 import lombok.Setter;
 

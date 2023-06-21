@@ -1,9 +1,8 @@
 package com.acelerati.gestionacademia.infraestructure.rest;
 
-import com.acelerati.gestionacademia.domain.ProgramaAcademico;
-import com.acelerati.gestionacademia.domain.TipoUsuario;
+import com.acelerati.gestionacademia.domain.enums.TipoUsuarioEnum;
+import com.acelerati.gestionacademia.domain.Usuario;
 import com.acelerati.gestionacademia.infraestructure.inputport.ProgramaAcademicoInputPort;
-import com.acelerati.gestionacademia.infraestructure.mapper.ProgramaAcademicoMapper;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.ProgramaAcademicoGetDto;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.ProgramaAcademicoPostDto;
 import com.acelerati.gestionacademia.infraestructure.rest.mapper.ProgramaAcademicoDtoMapper;
@@ -19,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("programas-academicos")
+@RequestMapping("api/v1/programas-academicos")
 @RequiredArgsConstructor
 @Tag(name = "ProgramaAcademicoRest", description = "Gestion de los programas academicos.")
 public class ProgramaAcademicoRest {
@@ -44,8 +43,9 @@ public class ProgramaAcademicoRest {
             @RequestBody ProgramaAcademicoPostDto programaAcademico,
             @RequestHeader(value = "idusuario") Long idUsuario) {
 
-        this.restTemplate.tienePermiso(idUsuario, TipoUsuario.DECANO.getId());
-
+        Usuario usuario = this.restTemplate.obtenerUsuario(idUsuario);
+        this.restTemplate.validarPermisos(usuario.getTipoUsuario(), TipoUsuarioEnum.DECANO.getId());
+        this.restTemplate.validarTipoUsuario(programaAcademico.getIdDirector(), TipoUsuarioEnum.DIRECTOR.getId());
         return new ResponseEntity<>(
                 this.mapper.toProgramaAcademicoPostDto(
                         this.programaAcademicoInputPort
@@ -53,6 +53,7 @@ public class ProgramaAcademicoRest {
                                         this.mapper.toProgramaAcademico(programaAcademico))),
                 HttpStatus.CREATED);
     }
+
 
     @PutMapping("{idPrograma}/{idDirector}")
     @Operation(summary = "Asignar director academico en un programa Academico",
@@ -69,7 +70,8 @@ public class ProgramaAcademicoRest {
             @RequestHeader(value = "idusuario") Long idUsuario
     ) {
 
-        this.restTemplate.tienePermiso(idUsuario, TipoUsuario.DECANO.getId());
+        Usuario usuario = this.restTemplate.obtenerUsuario(idUsuario);
+        this.restTemplate.validarPermisos(usuario.getTipoUsuario(), TipoUsuarioEnum.DECANO.getId());
         this.programaAcademicoInputPort.asignarDirector(idPrograma, idDirector);
         return ResponseEntity.noContent().build();
 
@@ -89,7 +91,8 @@ public class ProgramaAcademicoRest {
     public ResponseEntity<ProgramaAcademicoGetDto> eliminarProgramaAcademico(@PathVariable Long id,
                                                                              @RequestHeader(value = "idusuario")
                                                                              Long idUsuario) {
-        this.restTemplate.tienePermiso(idUsuario, TipoUsuario.DECANO.getId());
+        Usuario usuario = this.restTemplate.obtenerUsuario(idUsuario);
+        this.restTemplate.validarPermisos(usuario.getTipoUsuario(), TipoUsuarioEnum.DECANO.getId());
         return new ResponseEntity<>(
                 this.mapper.toProgramaAcademicoGetDto(
                         this.programaAcademicoInputPort.eliminarId(id)), HttpStatus.OK);

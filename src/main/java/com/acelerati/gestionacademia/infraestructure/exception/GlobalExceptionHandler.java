@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.ConnectException;
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
@@ -63,6 +64,35 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now());
         return new ResponseEntity<>(apiError, httpStatus);
     }
+
+
+    @ExceptionHandler(value = {ConexionRechazadaException.class})
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ApiError> conexionRechazadaException(
+            HttpServletRequest request,
+            ConexionRechazadaException apiRequestException) {
+        HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        ApiError apiError = new ApiError(apiRequestException.getMessage(),
+                httpStatus,
+                httpStatus.value(),
+                LocalDateTime.now());
+        return new ResponseEntity<>(apiError, httpStatus);
+    }
+
+
+    @ExceptionHandler(value = {ApiException.class})
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ApiError> apiException(
+            HttpServletRequest request,
+            ApiException apiRequestException) {
+        HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        ApiError apiError = new ApiError(apiRequestException.getMessage(),
+                httpStatus,
+                httpStatus.value(),
+                LocalDateTime.now());
+        return new ResponseEntity<>(apiError, httpStatus);
+    }
+
 
 }
 
