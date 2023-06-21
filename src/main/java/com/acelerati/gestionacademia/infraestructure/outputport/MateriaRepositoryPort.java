@@ -1,7 +1,6 @@
 package com.acelerati.gestionacademia.infraestructure.outputport;
 
 import com.acelerati.gestionacademia.domain.Materia;
-import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 
 import java.util.List;
 

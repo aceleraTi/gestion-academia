@@ -1,6 +1,7 @@
 package com.acelerati.gestionacademia.infraestructure.rest;
 
-import com.acelerati.gestionacademia.domain.TipoUsuario;
+import com.acelerati.gestionacademia.domain.Usuario;
+import com.acelerati.gestionacademia.domain.enums.TipoUsuarioEnum;
 import com.acelerati.gestionacademia.infraestructure.inputport.MateriaPort;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.MateriaGetDto;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.MateriaPostDto;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("materias")
+@RequestMapping("api/v1/materias")
 @RequiredArgsConstructor
 @Tag(name = "MateriaRest", description = "Gestion de las Materias.")
 public class MateriaRest {
@@ -42,7 +43,9 @@ public class MateriaRest {
             })
     public ResponseEntity<MateriaPostDto> crearMateria(@RequestBody MateriaPostDto materia,
                                                        @RequestHeader(value = "idusuario") Long idUsuario) {
-        this.restTemplate.tienePermiso(idUsuario, TipoUsuario.DIRECTOR.getId());
+
+        Usuario usuario = this.restTemplate.obtenerUsuario(idUsuario);
+        this.restTemplate.validarPermisos(usuario.getTipoUsuario(), TipoUsuarioEnum.DIRECTOR.getId());
         return new ResponseEntity<>(
                 this.mapper.toMateriaPostDto(
                         this.materiaPort.crearMateria(

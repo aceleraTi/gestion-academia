@@ -2,7 +2,6 @@ package com.acelerati.gestionacademia.domain;
 
 import com.acelerati.gestionacademia.domain.util.ValidacionGeneral;
 import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
-import com.acelerati.gestionacademia.infraestructure.exception.ConflictException;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 

@@ -1,7 +1,6 @@
 package com.acelerati.gestionacademia.domain;
 
 import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
-import com.acelerati.gestionacademia.infraestructure.exception.ConflictException;
 import lombok.Getter;
 import lombok.Setter;
 

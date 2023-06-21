@@ -2,8 +2,6 @@ package com.acelerati.gestionacademia.application;
 
 import com.acelerati.gestionacademia.infraestructure.inputport.NivelEducativoPort;
 import com.acelerati.gestionacademia.infraestructure.outputport.NivelEducativoRepositoryPort;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service

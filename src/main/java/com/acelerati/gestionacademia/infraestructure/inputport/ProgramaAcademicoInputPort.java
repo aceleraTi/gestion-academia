@@ -1,6 +1,5 @@
 package com.acelerati.gestionacademia.infraestructure.inputport;
 
-import com.acelerati.gestionacademia.domain.Pensum;
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 
 public interface ProgramaAcademicoInputPort {

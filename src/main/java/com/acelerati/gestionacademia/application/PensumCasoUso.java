@@ -1,14 +1,10 @@
 package com.acelerati.gestionacademia.application;
 
-import com.acelerati.gestionacademia.domain.Materia;
 import com.acelerati.gestionacademia.domain.Pensum;
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
-import com.acelerati.gestionacademia.infraestructure.inputport.MateriaPort;
 import com.acelerati.gestionacademia.infraestructure.inputport.PensumInputPort;
 import com.acelerati.gestionacademia.infraestructure.inputport.ProgramaAcademicoInputPort;
 import com.acelerati.gestionacademia.infraestructure.outputport.PensumRepositoryPort;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,13 +1,11 @@
 package com.acelerati.gestionacademia.application;
 
-import com.acelerati.gestionacademia.domain.Pensum;
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
 import com.acelerati.gestionacademia.infraestructure.exception.NotFoundException;
 import com.acelerati.gestionacademia.infraestructure.inputport.NivelEducativoPort;
 import com.acelerati.gestionacademia.infraestructure.inputport.ProgramaAcademicoInputPort;
 import com.acelerati.gestionacademia.infraestructure.outputport.ProgramaAcademicoRepositoryPort;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service

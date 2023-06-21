@@ -2,7 +2,6 @@ package com.acelerati.gestionacademia.infraestructure.outputadapter;
 
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
-import com.acelerati.gestionacademia.infraestructure.exception.NotFoundException;
 import com.acelerati.gestionacademia.infraestructure.mapper.ProgramaAcademicoMapper;
 import com.acelerati.gestionacademia.infraestructure.outputport.jparepository.ProgramaAcademicoJPARepository;
 import com.acelerati.gestionacademia.infraestructure.outputport.ProgramaAcademicoRepositoryPort;

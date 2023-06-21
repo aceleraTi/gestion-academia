@@ -4,5 +4,5 @@ import lombok.Getter;
 
 public class Url {
 
-    public static final String MICROSERVICIO_USUARIO = "http://localhost:8081/api/1.0/usuarios";
+    public static final String MICROSERVICIO_USUARIO = "http://localhost:9080/api/v1/usuarios";
 }

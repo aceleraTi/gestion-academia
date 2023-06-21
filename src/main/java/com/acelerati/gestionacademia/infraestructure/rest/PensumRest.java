@@ -1,9 +1,9 @@
 package com.acelerati.gestionacademia.infraestructure.rest;
 
-import com.acelerati.gestionacademia.domain.TipoUsuario;
+import com.acelerati.gestionacademia.domain.Usuario;
+import com.acelerati.gestionacademia.domain.enums.TipoUsuarioEnum;
 import com.acelerati.gestionacademia.infraestructure.inputport.PensumInputPort;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumGetDto;
-import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumMateriaGetDto;
 import com.acelerati.gestionacademia.infraestructure.rest.dto.PensumPostDto;
 import com.acelerati.gestionacademia.infraestructure.rest.mapper.PensumDtoMapper;
 import com.acelerati.gestionacademia.infraestructure.rest.resttemplete.RestTemplePort;
@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("pensums")
+@RequestMapping("api/v1/pensums")
 @RequiredArgsConstructor
 @Tag(name = "PensumRest", description = "Gestion de los pensums.")
 public class PensumRest {
@@ -27,7 +27,7 @@ public class PensumRest {
 
     private final PensumDtoMapper mapper;
 
-    private final RestTemplePort restTemple;
+    private final RestTemplePort restTemplate;
 
     @PostMapping()
     @Operation(summary = "Crear un pensum",
@@ -40,7 +40,8 @@ public class PensumRest {
             })
     public ResponseEntity<PensumPostDto> crearPensum(@RequestBody PensumPostDto pensum,
                                                      @RequestHeader(value = "idusuario") Long idUsuario) {
-        this.restTemple.tienePermiso(idUsuario, TipoUsuario.DIRECTOR.getId());
+        Usuario usuario = this.restTemplate.obtenerUsuario(idUsuario);
+        this.restTemplate.validarPermisos(usuario.getTipoUsuario(), TipoUsuarioEnum.DIRECTOR.getId());
         return new ResponseEntity<>(
                 this.mapper.toPensumPostDto(
                         this.pensumInputPort.crearPensum(
@@ -71,8 +72,8 @@ public class PensumRest {
             })
     public ResponseEntity<PensumGetDto> eliminarPensum(@PathVariable Long id,
                                                        @RequestHeader(value = "idusuario") Long idUsuario) {
-        this.restTemple.tienePermiso(idUsuario, TipoUsuario.DIRECTOR.getId());
-
+        Usuario usuario = this.restTemplate.obtenerUsuario(idUsuario);
+        this.restTemplate.validarPermisos(usuario.getTipoUsuario(), TipoUsuarioEnum.DIRECTOR.getId());
         return new ResponseEntity<>(
                 this.mapper.toPensumGetDto(
                         this.pensumInputPort.eliminarId(id)), HttpStatus.OK);

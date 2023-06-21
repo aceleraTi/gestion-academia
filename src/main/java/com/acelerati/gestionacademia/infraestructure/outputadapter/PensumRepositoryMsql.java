@@ -7,7 +7,6 @@ import com.acelerati.gestionacademia.infraestructure.mapper.PensumMapper;
 import com.acelerati.gestionacademia.infraestructure.outputport.PensumRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 @Component
 @RequiredArgsConstructor

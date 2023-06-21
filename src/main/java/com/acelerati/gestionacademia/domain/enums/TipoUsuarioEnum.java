@@ -1,11 +1,10 @@
-package com.acelerati.gestionacademia.domain;
+package com.acelerati.gestionacademia.domain.enums;
 
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-public enum TipoUsuario {
+public enum TipoUsuarioEnum {
     DECANO(1L),
     DIRECTOR(2L),
     PROFESOR(3L),
@@ -13,7 +12,7 @@ public enum TipoUsuario {
 
     private Long id;
 
-    TipoUsuario(Long id) {
+    TipoUsuarioEnum(Long id) {
         this.id = id;
     }
 
