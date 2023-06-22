@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public interface ProgramaAcademicoJPARepository extends JpaRepository<ProgramaAcademicoEntity, Long> {
 
@@ -18,6 +19,9 @@ public interface ProgramaAcademicoJPARepository extends JpaRepository<ProgramaAc
     @Transactional
     int actualizarDirector(Long idPrograma,
                            Long idDirector);
+
+
+    Optional<ProgramaAcademicoEntity> findByIdDirector(Long idDirector);
 
 
 }

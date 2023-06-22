@@ -10,12 +10,17 @@ import com.acelerati.gestionacademia.infraestructure.rest.resttemplete.RestTempl
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/v1/pensums")
@@ -34,11 +39,21 @@ public class PensumRest {
             parameters = {
                     @Parameter(in = ParameterIn.HEADER,
                             name = "idusuario",
-                            description = "id del usuario",
+                            description = "id del usuario que hace la solicitud",
                             required = true,
                             schema = @Schema(type = "integer"))
             })
-    public ResponseEntity<PensumPostDto> crearPensum(@RequestBody PensumPostDto pensum,
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Conflict", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content),
+
+
+    })
+    public ResponseEntity<PensumPostDto> crearPensum(@RequestBody @Valid PensumPostDto pensum,
                                                      @RequestHeader(value = "idusuario") Long idUsuario) {
         Usuario usuario = this.restTemplate.obtenerUsuario(idUsuario);
         this.restTemplate.validarPermisos(usuario.getTipoUsuario(), TipoUsuarioEnum.DIRECTOR.getId());
@@ -50,32 +65,52 @@ public class PensumRest {
     }
 
 
-    @GetMapping("{id}")
-    @Operation(summary = "Obtener un pensum"
+    @GetMapping("{idPensum}")
+    @Operation(summary = "Obtener un pensum por id"
     )
-    public ResponseEntity<PensumGetDto> obtenerPensum(@PathVariable Long id) {
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Conflict", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content),
+
+
+    })
+    public ResponseEntity<PensumGetDto> obtenerPensum(@Parameter(description = "id del pensum que se quiere consultar") @PathVariable Long idPensum) {
         return new ResponseEntity<>(
                 this.mapper.toPensumGetDto(
-                        this.pensumInputPort.obtenerPensum(id)),
+                        this.pensumInputPort.obtenerPensum(idPensum)),
                 HttpStatus.OK);
     }
 
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("{idPensum}")
     @Operation(summary = "Eliminar Pensum",
             parameters = {
                     @Parameter(in = ParameterIn.HEADER,
                             name = "idusuario",
-                            description = "id del usuario",
+                            description = "id del usuario que hace la solicitud",
                             required = true,
                             schema = @Schema(type = "integer"))
             })
-    public ResponseEntity<PensumGetDto> eliminarPensum(@PathVariable Long id,
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Conflict", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content),
+
+
+    })
+    public ResponseEntity<PensumGetDto> eliminarPensum(@Parameter(description = "id del pensum que se quiere eliminar") @PathVariable Long idPensum,
                                                        @RequestHeader(value = "idusuario") Long idUsuario) {
         Usuario usuario = this.restTemplate.obtenerUsuario(idUsuario);
         this.restTemplate.validarPermisos(usuario.getTipoUsuario(), TipoUsuarioEnum.DIRECTOR.getId());
         return new ResponseEntity<>(
                 this.mapper.toPensumGetDto(
-                        this.pensumInputPort.eliminarId(id)), HttpStatus.OK);
+                        this.pensumInputPort.eliminarId(idPensum)), HttpStatus.OK);
     }
 }

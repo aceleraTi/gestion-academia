@@ -9,12 +9,14 @@ values ("educación primaria", " escuela primaria (grados 1 a 6)"),
 INSERT INTO programa_academico(nombre,descripcion,id_nivel_educativo)
 values
 ('IngenieriaSistemas','Descripcion ingenieria de sistemas, descripcion', 1),
-('IngenieriaSistema2s','2Descripcion ingenieria de sistemas, descripcion2', 2)
+('IngenieriaAgrocologica','Descripcion ingenieria agrocologica, descripcion', 2),
+('IngenieriaIndustrial','Descripcion ingenieria industrial, descripcion', 2)
+
 ;
 
 INSERT INTO programa_academico(nombre,descripcion,id_nivel_educativo,id_director)
 values
-('IngenieriaSistemas5','Descripcion ingenieria de sistemas, descripcion', 1,1)
+('IngenieriaSistemas5','Descripcion ingenieria de sistemas, descripcion', 1,2)
 ;
 
 
@@ -22,7 +24,7 @@ INSERT INTO pensum(annio, id_programa_academico)
 values
 (2022,1),
 (2023,1),
-(2025,1)
+(2025,2)
 ;
 
 INSERT INTO materia (nombre, descripcion, id_pensum)
