@@ -72,6 +72,7 @@ public class ProgramaAcademicoRest {
 
         Usuario usuario = this.restTemplate.obtenerUsuario(idUsuario);
         this.restTemplate.validarPermisos(usuario.getTipoUsuario(), TipoUsuarioEnum.DECANO.getId());
+        this.restTemplate.validarTipoUsuario(idDirector, TipoUsuarioEnum.DIRECTOR.getId());
         this.programaAcademicoInputPort.asignarDirector(idPrograma, idDirector);
         return ResponseEntity.noContent().build();
 
