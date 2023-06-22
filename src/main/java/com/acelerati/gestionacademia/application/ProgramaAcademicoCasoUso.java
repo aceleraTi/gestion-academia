@@ -14,6 +14,7 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
 
     private static final String NO_EXISTE_NIVEL_EDUCATIVO = "no existe nivel educativo";
     private static final String NOMBRE_PROGRAMA_UNICO = "el nombre de cada programa es unico";
+    private static final String ERROR_DIRECTOR_ASIGNADO = "el director ya tiene un programa asignado";
 
     private final NivelEducativoPort nivelEducativoPort;
 
@@ -65,7 +66,9 @@ public class ProgramaAcademicoCasoUso implements ProgramaAcademicoInputPort {
     @Override
     public ProgramaAcademico asignarDirector(Long idPrograma, Long idDirector) {
         ProgramaAcademico programaAcademico = this.buscarId(idPrograma);
-        programaAcademico.validarDirector();
+        if (this.programaAcademicoRepositoryPort.buscarDirectorId(idDirector).isPresent()) {
+            throw new BadRequestException(ERROR_DIRECTOR_ASIGNADO);
+        }
         programaAcademico.setIdDirector(idDirector);
         this.programaAcademicoRepositoryPort.actualizarDirector(idPrograma,
                 idDirector);

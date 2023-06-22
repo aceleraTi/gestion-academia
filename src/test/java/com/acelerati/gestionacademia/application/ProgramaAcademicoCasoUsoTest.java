@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.acelerati.gestionacademia.application.util.UtilProgramaAcademico.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -312,17 +313,18 @@ class ProgramaAcademicoCasoUsoTest {
     }
 
     @Test
-    void cuandoSeQuierAsignarUnDirectorAUnProgramaQueYaTieneDirector() {
+    void cuandoSeQuierAsignarUnDirectorQueYaTieneUnProgramaAsignado() {
         ProgramaAcademico programaAcademico = new ProgramaAcademico();
         programaAcademico.setId(1L);
         programaAcademico.setIdDirector(2L);
         when(this.programaAcademicoCasoUso.buscarId(any())).thenReturn(programaAcademico);
+        when(this.programaAcademicoRepositoryPort.buscarDirectorId(any())).thenReturn(Optional.of(new ProgramaAcademico()));
 
 
         BadRequestException exception = assertThrows(BadRequestException.class,
                 () -> this.programaAcademicoCasoUso.asignarDirector(1L, 2L));
         assertNotNull(exception);
-        assertEquals(ERROR_DIRECTOR, exception.getMessage());
+        assertEquals(ERROR_DIRECTOR_ASIGNADO, exception.getMessage());
 
     }
 

@@ -15,6 +15,7 @@ public class UtilProgramaAcademico {
     public static final String ERROR_DESCRIPCION = "la longitud del campo descripcion es de 20 a " +
             "200 " +
             "caracteres";
+    public static final String ERROR_DIRECTOR_ASIGNADO = "el director ya tiene un programa asignado";
 
     public static final String ERROR_NOMBRE_UNICO = "el nombre de cada programa es unico";
 
