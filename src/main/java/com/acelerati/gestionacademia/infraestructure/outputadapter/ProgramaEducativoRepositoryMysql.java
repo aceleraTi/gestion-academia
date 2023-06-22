@@ -8,6 +8,8 @@ import com.acelerati.gestionacademia.infraestructure.outputport.ProgramaAcademic
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component()
 @RequiredArgsConstructor
 public class ProgramaEducativoRepositoryMysql implements
@@ -48,6 +50,12 @@ public class ProgramaEducativoRepositoryMysql implements
     @Override
     public int actualizarDirector(Long idPrograma, Long idDirector) {
         return this.programaAcademicoRepository.actualizarDirector(idPrograma, idDirector);
+    }
+
+    @Override
+    public Optional<ProgramaAcademico> buscarDirectorId(Long idDirector) {
+        return this.programaAcademicoRepository.findByIdDirector(idDirector)
+                .map(this.programaAcademicoMapper::toProgramaAcademico);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.acelerati.gestionacademia.infraestructure.outputport;
 
 import com.acelerati.gestionacademia.domain.ProgramaAcademico;
 
+import java.util.Optional;
+
 public interface ProgramaAcademicoRepositoryPort {
 
     ProgramaAcademico crearProgramaAcademico(ProgramaAcademico programaAcademico);
@@ -16,5 +18,8 @@ public interface ProgramaAcademicoRepositoryPort {
 
     int actualizarDirector(Long idPrograma,
                            Long idDirector);
+
+    Optional<ProgramaAcademico> buscarDirectorId(Long idDirector);
+
 }
 

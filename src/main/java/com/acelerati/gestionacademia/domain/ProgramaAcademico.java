@@ -2,16 +2,12 @@ package com.acelerati.gestionacademia.domain;
 
 import com.acelerati.gestionacademia.domain.util.ValidacionGeneral;
 import com.acelerati.gestionacademia.infraestructure.exception.BadRequestException;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
-@Schema(description = "Dominio del programa academico.")
 public class ProgramaAcademico {
 
     private static final String ERROR_LETRAS = "el nombre debe contener solo letras";
